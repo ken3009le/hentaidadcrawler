@@ -1,97 +1,71 @@
+
 <!DOCTYPE html>
 <html lang="vi">
 
 <head>
   <meta charset="UTF-8">
-  <title>SPYRONX Pro</title>
+  <title>Crawler</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <!-- icon -->
+  <link rel="icon" href="e-A69.ico" type="image/x-icon">
   <style>
-    * {
-      box-sizing: border-box;
-    }
-
     body {
-      background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
-      color: #e0e0e0;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      background: #111;
+      color: #fff;
+      font-family: monospace;
       margin: 0;
-      min-height: 100vh;
     }
 
     .header-bar {
       display: flex;
       align-items: center;
-      padding: 16px 24px;
-      background: rgba(20, 20, 20, 0.95);
-      backdrop-filter: blur(10px);
-      border-bottom: 1px solid rgba(255, 165, 0, 0.2);
-      position: sticky;
-      top: 0;
-      z-index: 100;
-      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+      padding: 10px 14px;
+      background: #111;
     }
 
-    .logo {
-      font-size: 18px;
-      font-weight: bold;
-      color: #ff9500;
-      margin-right: 20px;
-      letter-spacing: 2px;
+    .popup img {
+      width: auto;
+      max-width: 98vw;
+      max-height: 98vh;
+      object-fit: contain;
+      border-radius: 10px;
+      box-shadow: 0 0 40px #f0f;
     }
 
     #tagSearch {
       flex: 1;
-      padding: 12px 16px;
-      background: rgba(40, 40, 40, 0.8);
+      padding: 8px 14px;
+      background: #000;
       color: #fff;
-      border: 1px solid rgba(255, 165, 0, 0.3);
-      border-radius: 8px;
+      border: none;
+      border-bottom: 1px solid #333;
       font-size: 14px;
-      margin-right: 16px;
-      transition: all 0.3s ease;
-      outline: none;
-    }
-
-    #tagSearch:focus {
-      border-color: #ff9500;
-      box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.1);
-      background: rgba(50, 50, 50, 0.9);
+      margin-right: 10px;
     }
 
     #menuIcon {
-      width: 32px;
-      height: 32px;
+      width: 24px;
+      height: 24px;
       cursor: pointer;
       display: flex;
       flex-direction: column;
-      justify-content: center;
-      gap: 4px;
-      padding: 6px;
-      border-radius: 6px;
-      transition: all 0.3s ease;
-    }
-
-    #menuIcon:hover {
-      background: rgba(255, 149, 0, 0.1);
+      justify-content: space-between;
     }
 
     #menuIcon div {
       width: 100%;
-      height: 2px;
-      background: #ff9500;
-      border-radius: 1px;
-      transition: all 0.3s ease;
+      height: 4px;
+      background: #fff;
     }
 
     .tag-bar {
       display: flex;
       overflow-x: auto;
       white-space: nowrap;
-      background: rgba(30, 30, 30, 0.8);
-      padding: 16px 24px;
-      gap: 12px;
+      background: #222;
+      padding: 10px 14px;
+      gap: 10px;
       scrollbar-width: none;
-      border-bottom: 1px solid rgba(255, 165, 0, 0.1);
     }
 
     .tag-bar::-webkit-scrollbar {
@@ -99,63 +73,49 @@
     }
 
     .tag {
-      background: linear-gradient(135deg, #333 0%, #444 100%);
-      color: #e0e0e0;
-      padding: 10px 20px;
-      border-radius: 25px;
+      background: #333;
+      color: #fff;
+      padding: 8px 16px;
+      border-radius: 999px;
       cursor: pointer;
-      font-size: 13px;
-      font-weight: 500;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 165, 0, 0.2);
-      white-space: nowrap;
-      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+      font-size: 14px;
+      transition: 0.25s;
     }
 
     .tag:hover {
-      background: linear-gradient(135deg, #ff9500 0%, #ffb347 100%);
+      background: orange;
       color: #000;
-      transform: translateY(-2px);
-      box-shadow: 0 8px 25px rgba(255, 149, 0, 0.3);
+      transform: scale(1.05);
     }
 
     .result {
-      padding: 24px;
-      max-width: 1400px;
-      margin: 0 auto;
+      padding: 10px;
     }
 
     .card {
       display: flex;
-      align-items: flex-start;
-      gap: 20px;
-      background: linear-gradient(135deg, rgba(40, 40, 40, 0.8) 0%, rgba(50, 50, 50, 0.6) 100%);
-      border: 1px solid rgba(255, 165, 0, 0.2);
-      border-radius: 16px;
-      padding: 20px;
-      margin: 16px 0;
-      transition: all 0.4s ease;
-      backdrop-filter: blur(10px);
-      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+      align-items: center;
+      gap: 10px;
+      background: #1a1a1a;
+      border: 1px solid #333;
+      border-radius: 10px;
+      padding: 10px;
+      margin: 10px 0;
+      cursor: pointer;
+      transition: 0.2s;
     }
 
     .card:hover {
-      border-color: #ff9500;
-      box-shadow: 0 12px 40px rgba(255, 149, 0, 0.15);
-      transform: translateY(-4px);
+      border-color: orange;
+      box-shadow: 0 0 10px rgba(255, 165, 0, 0.3);
     }
 
     .card img {
-      width: 200px;
-      height: 140px;
+      width: 100%;
+      max-width: 240px;
+      height: auto;
       object-fit: cover;
-      border-radius: 12px;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-      transition: all 0.3s ease;
-    }
-
-    .card img:hover {
-      transform: scale(1.05);
+      border-radius: 10px;
     }
 
     .card-content {
@@ -164,179 +124,110 @@
       word-wrap: break-word;
       word-break: break-word;
       white-space: normal;
+      max-width: 100%;
     }
 
     .card-actions {
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: 6px;
       align-items: flex-end;
-      min-width: 120px;
-    }
-
-    .btn {
-      padding: 10px 20px;
-      font-size: 13px;
-      font-weight: 600;
-      border-radius: 8px;
-      cursor: pointer;
-      transition: all 0.3s ease;
-      text-decoration: none;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      min-width: 100px;
-      text-align: center;
-      border: none;
-      outline: none;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-    }
-
-    .open-btn {
-      background: linear-gradient(135deg, #ff9500 0%, #ffb347 100%);
-      color: #000;
     }
 
     .open-btn:hover {
-      background: linear-gradient(135deg, #ffb347 0%, #ffd700 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(255, 149, 0, 0.4);
+      background: orange;
+      color: black;
+      border-color: orange;
     }
 
     .view-btn {
-      background: linear-gradient(135deg, #555 0%, #666 100%);
+      background: #333;
       color: #fff;
+      border: 1px solid #555;
+      padding: 6px 12px;
+      font-size: 13px;
+      border-radius: 6px;
+      cursor: pointer;
+      transition: 0.2s;
+      min-width: 60px;
+      text-align: center;
     }
 
     .view-btn:hover {
-      background: linear-gradient(135deg, #777 0%, #888 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(119, 119, 119, 0.4);
+      background: #555;
+      border-color: #777;
     }
-
-    .view-btn.active-gallery {
-      background: linear-gradient(135deg, #dc3545 0%, #e85d04 100%);
-      color: #fff;
-    }
-
-    .view-btn.active-gallery:hover {
-      background: linear-gradient(135deg, #e85d04 0%, #fd7e14 100%);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 20px rgba(220, 53, 69, 0.4);
-    }
-
 
     .card-title {
-      font-weight: 700;
-      color: #ff9500;
-      margin-bottom: 8px;
-      font-size: 16px;
-      line-height: 1.4;
-    }
-
-    .card-url {
-      color: #999;
-      font-size: 12px;
-      opacity: 0.8;
-      font-family: monospace;
+      font-weight: bold;
+      color: orange;
+      margin-bottom: 4px;
     }
 
     #tagExplorer {
       display: none;
-      padding: 24px;
-      background: rgba(20, 20, 20, 0.8);
-    }
-
-    #tagExplorer h2 {
-      color: #ff9500;
-      margin-bottom: 20px;
-      font-size: 24px;
-      font-weight: 700;
+      padding: 10px;
+      background: #111;
     }
 
     #tagFilter {
       width: 100%;
-      padding: 12px 16px;
-      margin: 16px 0 24px 0;
-      background: rgba(40, 40, 40, 0.8);
-      border: 1px solid rgba(255, 165, 0, 0.3);
+      padding: 8px;
+      margin: 10px 0;
+      background: #222;
+      border: 1px solid #444;
       color: #fff;
-      border-radius: 8px;
-      font-size: 14px;
-      outline: none;
-      transition: all 0.3s ease;
-    }
-
-    #tagFilter:focus {
-      border-color: #ff9500;
-      box-shadow: 0 0 0 3px rgba(255, 149, 0, 0.1);
+      border-radius: 6px;
     }
 
     .tag-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-      gap: 16px;
-      max-width: 1400px;
-      margin: 0 auto;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 12px;
     }
 
     .tag-item {
-      background: linear-gradient(135deg, rgba(40, 40, 40, 0.8) 0%, rgba(50, 50, 50, 0.6) 100%);
-      padding: 16px;
-      border-radius: 12px;
+      background: #222;
+      padding: 10px;
+      border-radius: 10px;
       text-align: center;
       cursor: pointer;
-      transition: all 0.3s ease;
-      border: 1px solid rgba(255, 165, 0, 0.2);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
     }
 
     .tag-item:hover {
-      background: linear-gradient(135deg, #ff9500 0%, #ffb347 100%);
+      background: orange;
       color: #000;
-      transform: translateY(-4px);
-      box-shadow: 0 12px 30px rgba(255, 149, 0, 0.3);
     }
 
     .tag-thumb {
       width: 100%;
       height: 120px;
       object-fit: cover;
-      border-radius: 8px;
-      margin-bottom: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-radius: 6px;
+      margin-bottom: 6px;
     }
 
     .gallery {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-      gap: 16px;
-      margin-top: 20px;
-      padding: 20px;
-      background: rgba(30, 30, 30, 0.5);
-      border-radius: 12px;
-      animation: fadeIn 0.5s ease;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 10px;
+      animation: fadeIn 0.3s ease;
     }
 
     .gallery img {
       width: 100%;
-      height: 200px;
-      object-fit: contain; /* Thay đổi từ cover sang contain */
-      border-radius: 12px;
+      max-width: calc(33.333% - 10px);
+      height: auto;
+      border-radius: 10px;
       cursor: zoom-in;
       transition: all 0.3s ease;
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    }
-
-    .gallery img:hover {
-      transform: scale(1.05);
-      box-shadow: 0 8px 25px rgba(255, 149, 0, 0.2);
+      object-fit: cover;
     }
 
     @media (max-width: 1024px) {
-      .gallery {
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      .gallery img {
+        max-width: calc(50% - 10px);
       }
 
       .card {
@@ -344,35 +235,45 @@
         text-align: center;
       }
 
-      .card img {
-        width: 100%;
-        max-width: 300px;
-        margin: 0 auto;
-      }
-
       .card-actions {
         align-items: center;
         flex-direction: row;
         justify-content: center;
-        width: 100%;
       }
     }
 
     @media (max-width: 600px) {
-      .gallery {
-        grid-template-columns: 1fr;
+      .gallery img {
+        max-width: 100%;
+      }
+    }
+
+    .gallery img.expanded {
+      position: fixed;
+      top: 50%;
+      left: 50%;
+      max-width: 95vw;
+      max-height: 95vh;
+      width: auto;
+      height: auto;
+      transform: translate(-50%, -50%);
+      border: 4px solid #f0f;
+      border-radius: 14px;
+      background: #000;
+      z-index: 9999;
+      box-shadow: 0 0 30px #f0f;
+      cursor: zoom-out;
+    }
+
+    @keyframes fadeIn {
+      from {
+        opacity: 0;
+        transform: scale(0.97);
       }
 
-      .header-bar {
-        padding: 12px 16px;
-      }
-
-      .logo {
-        display: none;
-      }
-
-      .result {
-        padding: 16px;
+      to {
+        opacity: 1;
+        transform: scale(1);
       }
     }
 
@@ -382,105 +283,65 @@
       left: 0;
       width: 100vw;
       height: 100vh;
-      background: rgba(0, 0, 0, 0.95);
+      background: rgba(0, 0, 0, 0.85);
       display: none;
       align-items: center;
       justify-content: center;
       z-index: 9999;
-      animation: fadeIn 0.3s ease;
-      backdrop-filter: blur(10px);
+      animation: fadeIn 0.2s ease;
     }
 
     .image-zoom-overlay img {
-      max-width: 90vw;
-      max-height: 90vh;
-      object-fit: contain; /* Đảm bảo ảnh zoom không bị cắt */
+      max-width: 96vw;
+      max-height: 96vh;
       border-radius: 12px;
-      box-shadow: 0 0 50px rgba(255, 149, 0, 0.3);
+      box-shadow: 0 0 40px #f0f;
       transition: transform 0.3s ease;
       cursor: pointer;
     }
 
-    @keyframes fadeIn {
-      from {
-        opacity: 0;
-        transform: scale(0.9);
-      }
-
-      to {
-        opacity: 1;
-        transform: scale(1);
-      }
+    .logo {
+      height: 40px;
+      width: auto;
+      margin-right: 14px;
+      border-radius: 6px;
     }
-
-    .loading-indicator {
-      display: inline-block;
-      color: #ff9500;
-      font-weight: 600;
-    }
-
-    .status-message {
-      background: rgba(255, 149, 0, 0.1);
-      border: 1px solid rgba(255, 149, 0, 0.3);
-      color: #ff9500;
-      padding: 16px 20px;
-      border-radius: 8px;
-      margin: 16px 0;
-      font-weight: 500;
-    }
-
-    .volume-control {
-      position: fixed;
-      bottom: 20px;
-      right: 20px;
-      background: rgba(40, 40, 40, 0.9);
-      padding: 12px;
-      border-radius: 8px;
-      border: 1px solid rgba(255, 165, 0, 0.3);
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.3);
-    }
-
-    .volume-control input[type="range"] {
-      width: 120px;
-      opacity: 0.8;
-      transition: opacity 0.3s ease;
-    }
-
-    .volume-control:hover input[type="range"] {
-      opacity: 1;
+    /* /* cho tagSearch to ra */
+    #tagSearch {
+      flex: 1;
+      padding: 8px 14px;
+      background: #000;
+      color: #fff;
+      border: none;
+      border-bottom: 1px solid #333;
+      font-size: 14px;
+      margin-right: 10px;
     }
   </style>
 </head>
 
 <body>
   <div class="header-bar">
-    <div class="logo">SPYRONX</div>
-    <input type="text" id="tagSearch" placeholder="🔍 Tìm kiếm tags...">
+    <a href="#"><img src="Archive-69.png" alt="Logo" class="logo"></a>
+    <input type="text" id="tagSearch" placeholder="🔍 Tìm tag...">
     <div id="menuIcon">
       <div></div>
       <div></div>
       <div></div>
     </div>
   </div>
-
   <audio id="bgMusic" src="music.mp3" loop preload="auto"></audio>
-  <div class="volume-control">
-    <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.4">
-  </div>
+  <input type="range" id="volumeSlider" min="0" max="1" step="0.01" value="0.4"
+    style="position:fixed;bottom:10px;right:10px;opacity:0.6;width:120px;">
 
-  <div class="tag-bar" id="tagBar">
-    <span class="loading-indicator">Đang tải tags...</span>
-  </div>
+  <div class="tag-bar" id="tagBar"><span>Đang tải tag...</span></div>
   <div class="result" id="result"></div>
 
   <div id="tagExplorer">
-    <h2>🧠 Khám phá tất cả Tags</h2>
-    <input type="text" id="tagFilter" placeholder="Tìm kiếm tags... (nhấn / để focus nhanh)">
-    <div class="tag-grid" id="tagGrid">
-      <div class="loading-indicator">Đang tải...</div>
-    </div>
+    <h2>🧠 Tất cả Tag</h2>
+    <input type="text" id="tagFilter" placeholder="Tìm tag... (ấn / để focus)">
+    <div class="tag-grid" id="tagGrid">Đang tải...</div>
   </div>
-
   <div class="image-zoom-overlay" id="zoomOverlay" onclick="this.style.display='none'"></div>
 
   <script>
@@ -504,8 +365,8 @@
 
         renderTags(data);
       } catch (e) {
-        document.getElementById('tagBar').innerHTML = `<span style="color:#ff4444">Lỗi: ${e.message}</span>`;
-        document.getElementById('tagGrid').innerHTML = `<span style="color:#ff4444">Lỗi: ${e.message}</span>`;
+        document.getElementById('tagBar').innerHTML = 'Lỗi: ' + e.message;
+        document.getElementById('tagGrid').innerHTML = 'Lỗi: ' + e.message;
       }
     }
 
@@ -515,10 +376,7 @@
       list.forEach(item => {
         const div = document.createElement('div');
         div.className = 'tag-item';
-        div.innerHTML = `
-          <img src="${item.thumb || 'https://via.placeholder.com/200x120/333/fff?text=No+Image'}" class="tag-thumb" alt="${item.name}">
-          <div style="font-weight: 600;">${item.name}</div>
-        `;
+        div.innerHTML = `<img src="${item.thumb || 'https://via.placeholder.com/160x120'}" class="tag-thumb"><div>${item.name}</div>`;
         div.onclick = () => crawlAllPages(item.url);
         grid.appendChild(div);
       });
@@ -526,7 +384,7 @@
 
     function crawlAllPages(baseUrl) {
       const result = document.getElementById('result');
-      result.innerHTML = `<div class="status-message">🔄 Đang crawl dữ liệu từ: <strong>${baseUrl}</strong></div>`;
+      result.innerHTML = `<p>Đang crawl: <strong>${baseUrl}</strong></p>`;
       const postMap = new Map();
       let page = 1;
 
@@ -544,7 +402,7 @@
           articles.forEach(article => {
             const link = article.querySelector('a')?.href || '';
             if (!link.includes('/hentai/')) {
-              const title = article.querySelector('h2 a')?.textContent.trim() || '(Không có tiêu đề)';
+              const title = article.querySelector('h2 a')?.textContent.trim() || '(Không tiêu đề)';
               const thumb = article.querySelector('img')?.src || '';
               if (!postMap.has(link)) {
                 postMap.set(link, { title, thumb });
@@ -555,7 +413,6 @@
 
           if (found > 0) {
             page++;
-            result.innerHTML = `<div class="status-message">🔄 Đang crawl trang ${page}... Đã tìm thấy ${postMap.size} bài viết</div>`;
             next();
           } else finish();
         } catch {
@@ -565,56 +422,34 @@
 
       function finish() {
         if (postMap.size) {
-          result.innerHTML = `<div class="status-message">✅ Hoàn thành! Tìm thấy ${postMap.size} bài viết</div>` +
-            [...postMap.entries()].map(([url, post]) => `
-            <div class="card">
-              <img src="${post.thumb || 'https://via.placeholder.com/200x140/333/fff?text=No+Image'}" alt="thumbnail" loading="lazy">
-              <div class="card-content">
-                <div class="card-title">${post.title}</div>
-                <div class="card-url">${url}</div>
-              </div>
-              <div class="card-actions">
-                <button class="btn open-btn" onclick="event.stopPropagation(); window.open('${url.replace(/'/g, "\\'")}', '_blank')">
-                  🔗 Mở Link
-                </button>
-                <button class="btn view-btn" onclick="loadGallery('${url.replace(/'/g, "\\'")}', this)">
-                  👁️ Xem Ảnh
-                </button>
-              </div>
+          result.innerHTML += [...postMap.entries()].map(([url, post]) => `
+          <div class="card">
+            <img src="${post.thumb}" alt="thumb" loading="lazy">
+            <div class="card-content">
+              <div class="card-title">${post.title}</div>
+              <div style="color:#888;font-size:12px">${url}</div>
             </div>
-          `).join('');
+            <div class="card-actions">
+              <button class="open-btn" onclick="event.stopPropagation(); window.open('${url.replace(/'/g, "\\'")}', '_blank')">🔗 Open</button>
+              <button class="view-btn" onclick="loadGallery('${url.replace(/'/g, "\\'")}')">👁️ View</button>
+            </div>
+          </div>
+        `).join('');
         } else {
-          result.innerHTML = `<div class="status-message" style="border-color:#ff4444;background:rgba(255,68,68,0.1);color:#ff4444">❌ Không tìm thấy bài viết nào.</div>`;
+          result.innerHTML += `<p style="color:orange">Không tìm thấy bài viết nào.</p>`;
         }
       }
 
       next();
     }
 
-    async function loadGallery(postUrl, button) {
-      const currentGallery = button.closest('.card').nextElementSibling;
-      if (currentGallery && currentGallery.classList.contains('gallery')) {
-        currentGallery.remove();
-        button.classList.remove('active-gallery');
-        button.textContent = '👁️ Xem Ảnh';
-        return;
-      }
-
-      document.querySelectorAll('.gallery').forEach(g => g.remove());
-      document.querySelectorAll('.view-btn').forEach(btn => {
-        btn.classList.remove('active-gallery');
-        btn.textContent = '👁️ Xem Ảnh';
-      });
-
+    async function loadGallery(postUrl) {
       try {
         const res = await fetch(`https://api.allorigins.win/raw?url=${encodeURIComponent(postUrl)}`);
         const html = await res.text();
         const doc = new DOMParser().parseFromString(html, 'text/html');
         const gallery = doc.querySelectorAll('#lightgallery a[href$=".webp"]');
-        if (!gallery.length) {
-          alert('❌ Không tìm thấy ảnh nào!');
-          return;
-        }
+        if (!gallery.length) return alert('Không tìm thấy ảnh!');
 
         const container = document.createElement('div');
         container.className = 'gallery';
@@ -637,14 +472,12 @@
         const cards = document.querySelectorAll('.card');
         cards.forEach(card => {
           const cardContent = card.querySelector('.card-content');
-          if (cardContent && cardContent.innerText.includes(postUrl)) {
+          if (cardContent && cardContent.innerText.includes(postUrl) && !card.nextElementSibling?.classList.contains('gallery')) {
             card.insertAdjacentElement('afterend', container);
-            button.classList.add('active-gallery');
-            button.textContent = '◀ Thu Ảnh';
           }
         });
       } catch (e) {
-        alert('❌ Lỗi tải ảnh: ' + e.message);
+        alert('Lỗi ảnh: ' + e.message);
       }
     }
 
@@ -684,43 +517,13 @@
       if (e.key.toLowerCase() === 'r') {
         document.getElementById('result').innerHTML = '';
         document.querySelectorAll('.gallery').forEach(g => g.remove());
-        document.querySelectorAll('.view-btn').forEach(button => {
-          button.classList.remove('active-gallery');
-          button.textContent = '👁️ Xem Ảnh';
-        });
-        console.log('[SPYRONX] Đã xóa toàn bộ kết quả tìm kiếm');
+        console.log('[X.SYNTH] Đã xóa toàn bộ dấu vết. Chỉ còn tag + search.');
       }
 
-      if (e.key === '/') {
-        const activeElementId = document.activeElement.id;
-        if (activeElementId !== 'tagSearch' && activeElementId !== 'tagFilter') {
-          e.preventDefault();
-          const explorer = document.getElementById('tagExplorer');
-          if (explorer.style.display === 'block') {
-            document.getElementById('tagFilter').focus();
-          } else {
-            document.getElementById('tagSearch').focus();
-          }
-        }
-      }
-
-      if (e.key === 'Escape') {
-        const zoomOverlay = document.getElementById('zoomOverlay');
-        if (zoomOverlay.style.display === 'flex') {
-          zoomOverlay.style.display = 'none';
-        }
-
-        const openGalleries = document.querySelectorAll('.gallery');
-        openGalleries.forEach(gallery => {
-          gallery.remove();
-        });
-
-        document.querySelectorAll('.view-btn').forEach(button => {
-          button.classList.remove('active-gallery');
-          button.textContent = '👁️ Xem Ảnh';
-        });
-
-        console.log('[SPYRONX] Đã đóng tất cả ảnh và gallery.');
+      if (e.key === '/' && !['tagSearch', 'tagFilter'].includes(document.activeElement.id)) {
+        e.preventDefault();
+        const explorer = document.getElementById('tagExplorer');
+        (explorer.style.display === 'block' ? tagFilter : tagSearch).focus();
       }
     });
 
@@ -733,23 +536,38 @@
     const music = document.getElementById('bgMusic');
     const volumeSlider = document.getElementById('volumeSlider');
 
-    music.volume = 0.4;
+    music.volume = 0.4; // mặc định 40%
     volumeSlider.value = 0.4;
 
     let isPlaying = false;
 
+    // Bật/tắt nhạc bằng phím M
     document.addEventListener('keydown', function (e) {
       if (e.key.toLowerCase() === 'm') {
         isPlaying ? music.pause() : music.play();
         isPlaying = !isPlaying;
-        console.log(`[SPYRONX] Nhạc ${isPlaying ? 'đang phát' : 'tạm dừng'}`);
+        console.log(`[X.SYNTH] Nhạc ${isPlaying ? 'đang phát' : 'tạm dừng'}.`);
+      }
+
+      if (e.key.toLowerCase() === 'r') {
+        document.getElementById('result').innerHTML = '';
+        document.querySelectorAll('.gallery').forEach(g => g.remove());
+        console.log('[X.SYNTH] Đã xóa toàn bộ dấu vết. Chỉ còn tag + search.');
+      }
+
+      if (e.key === '/' && !['tagSearch', 'tagFilter'].includes(document.activeElement.id)) {
+        e.preventDefault();
+        const explorer = document.getElementById('tagExplorer');
+        (explorer.style.display === 'block' ? tagFilter : tagSearch).focus();
       }
     });
 
+    // Cập nhật volume theo slider
     volumeSlider.addEventListener('input', function () {
       music.volume = parseFloat(this.value);
-      console.log(`[SPYRONX] Volume: ${Math.round(music.volume * 100)}%`);
+      console.log(`[X.SYNTH] Volume: ${Math.round(music.volume * 100)}%`);
     });
+
   </script>
 </body>
 
